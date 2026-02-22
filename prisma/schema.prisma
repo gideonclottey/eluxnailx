@@ -3,7 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  // Use postgresql for production (Vercel / Neon).
+  // For local dev with SQLite, change provider back to "sqlite" and
+  // set DATABASE_URL="file:./dev.db" — then re-run `prisma migrate dev`.
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
