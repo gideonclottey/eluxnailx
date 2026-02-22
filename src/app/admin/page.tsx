@@ -60,8 +60,11 @@ export default async function AdminPage({
           <p className="text-white/70 text-xs">Nail Studio</p>
         </div>
         <div className="flex items-center gap-3">
+          <a href="/admin/services" className="text-white/80 hover:text-white text-sm underline">
+            Services
+          </a>
           <a href="/book" className="text-white/80 hover:text-white text-sm underline">
-            ← Booking page
+            Booking page
           </a>
           <form action={logout}>
             <button className="px-3 py-1.5 text-sm bg-white/20 hover:bg-white/30 rounded-lg transition-colors">
