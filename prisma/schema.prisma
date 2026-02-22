@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id              Int       @id @default(autoincrement())
+  name            String
+  durationMinutes Int
+  priceCents      Int
+  isActive        Boolean   @default(true)
+  bookings        Booking[]
+}
+
+model Booking {
+  id            Int      @id @default(autoincrement())
+  serviceId     Int
+  service       Service  @relation(fields: [serviceId], references: [id])
+  startAt       DateTime
+  endAt         DateTime
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  notes         String?
+  // "confirmed" | "cancelled"
+  status        String   @default("confirmed")
+  createdAt     DateTime @default(now())
+
+  @@index([startAt])
+}
+
+model BlockedSlot {
+  id        Int      @id @default(autoincrement())
+  startAt   DateTime
+  endAt     DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@index([startAt])
+}
